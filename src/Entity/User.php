@@ -34,6 +34,11 @@ class User implements UserInterface
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $permi;
+
     
     /**
      * @return string|null
@@ -93,5 +98,17 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+    public function getPermi(): ?string
+    {
+        return $this->permi;
+    }
+
+    public function setPermi(?string $permi): self
+    {
+        $this->permi = $permi;
+
+        return $this;
     }
 }
