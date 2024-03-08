@@ -27,7 +27,7 @@ class AuthController extends ApiController
      * @param Request $request
      * @param UserPasswordEncoderInterface $encoder
      * @return JsonResponse
-     */
+    */
     public function register(Request $request, UserPasswordEncoderInterface $encoder): JsonResponse
     {
         $request = $this->transformJsonBody($request);
