@@ -47,6 +47,7 @@ class AuthController extends ApiController
         $horIniFim = $request->get('horini2');
         $horIniAft = $request->get('horini3');
         $horFimAft = $request->get('horini4');
+        $file = $request->get('foto');
 
         if (empty($username) || empty($password) || empty($email)) {
             return $this->respondValidationError("Invalid Username or Password or Email");
@@ -69,6 +70,7 @@ class AuthController extends ApiController
         $user->setHorIniFim($horIniFim);
         $user->setHorIniAft($horIniAft);
         $user->setHorFimAft($horFimAft);
+        $user->setFile($file);
 
         //dd($user);
         $this->em->persist($user);
