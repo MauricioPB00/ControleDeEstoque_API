@@ -5,3 +5,8 @@ register:
     path: /api/register
     controller: App\Controller\AuthController::register
     methods: POST
+
+FileUploadController:
+    path: /api/upload-file
+    controller: App\Controller\FileUploadController::upload
+    methods: POST
