@@ -34,7 +34,10 @@ public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $even
 
     $data['ip'] = $request->getClientIp();
     $data['permi'] = $event->getUser()->getPermi();
+    $data['username'] = $event->getUser()->getUsername();
+    $data['id'] = $event->getUser()->getId();
 
+ 
     $event->setData($data);
 }
 }
