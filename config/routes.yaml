@@ -10,3 +10,13 @@ FileUploadController:
     path: /api/upload-file
     controller: App\Controller\FileUploadController::upload
     methods: POST
+
+api_user_datetime_create:
+    path: /api/user/{userId}/datetime
+    controller: App\Controller\UserDateTimeController::create
+    methods: POST
+
+api_user_datetime_recent:
+    path: /api/user/{userId}/datetime/recent
+    controller: App\Controller\UserDateTimeController::getRecentUserDateTime
+    methods: GET

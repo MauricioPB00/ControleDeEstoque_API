@@ -569,3 +569,19 @@ http://127.0.0.1:8000/api/register
 
 https://github.com/nelmio/NelmioCorsBundle
 https://helmi-bejaoui.medium.com/a-beginners-guide-on-jwt-authentication-symfony-5-api-based-bd6622bfe975
+
+
+
+
+
+
+
+
+
+
+Para confirmar que as tabelas estao relacionadas
+
+
+SELECT udt.id AS user_date_time_id, udt.date AS user_date, udt.time AS user_time, u.id AS user_id, u.username AS username
+FROM user_date_time udt
+JOIN "user" u ON udt.user_id = u.id;
