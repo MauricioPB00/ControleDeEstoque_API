@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Entity\UserDateTime;
@@ -35,7 +36,9 @@ class UserDateTimeController extends AbstractController
         $entityManager->persist($userDateTime);
         $entityManager->flush();
 
-        return new JsonResponse(['message' => 'UserDateTime created successfully'], Response::HTTP_CREATED);
+        $dateTime = $userDateTime->getDate()->format('Y-m-d') . ' ' . $userDateTime->getTime()->format('H:i:s');
+
+        return new JsonResponse(['message' => 'Hora Registrada com sucesso', 'dateTime' => $dateTime], Response::HTTP_CREATED);
     }
 
     /**
@@ -51,7 +54,7 @@ class UserDateTimeController extends AbstractController
 
         $currentDate = new \DateTime();
         $fiveDaysAgo = new \DateTime();
-        $fiveDaysAgo->modify('-5 days');
+        $fiveDaysAgo->modify('-2 days');
 
         $userDateTimes = $userDateTimeRepository->findRecentUserDateTimes($user, $fiveDaysAgo, $currentDate);
 

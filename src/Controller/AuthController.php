@@ -27,7 +27,7 @@ class AuthController extends ApiController
      * @param Request $request
      * @param UserPasswordEncoderInterface $encoder
      * @return JsonResponse
-    */
+     */
     public function register(Request $request, UserPasswordEncoderInterface $encoder): JsonResponse
     {
         $request = $this->transformJsonBody($request);
@@ -52,7 +52,7 @@ class AuthController extends ApiController
         if (empty($username) || empty($password) || empty($email)) {
             return $this->respondValidationError("Invalid Username or Password or Email");
         }
-        
+
         $user = new User($username);
         $user->setPassword($encoder->encodePassword($user, $password));
         $user->setEmail($email);
@@ -75,9 +75,8 @@ class AuthController extends ApiController
         //dd($user);
         $this->em->persist($user);
         //dd($user);
-        $this->em-> flush();
-        
+        $this->em->flush();
+
         return $this->respondWithSuccess(sprintf('User %s successfully created', $user->getUsername()));
     }
-
 }

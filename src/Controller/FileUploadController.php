@@ -15,7 +15,7 @@ class FileUploadController extends AbstractController
     public function upload(Request $request)
     {
         //var_dump($request->files->all());
-        
+
         $file = $request->files->get('foto');
         //echo('<br>');
         //var_dump($file);

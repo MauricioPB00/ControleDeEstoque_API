@@ -148,6 +148,4 @@ class ApiController extends AbstractController
 
         return $request;
     }
-
-
 }
