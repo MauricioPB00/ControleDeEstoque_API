@@ -20,3 +20,8 @@ api_user_datetime_recent:
     path: /api/user/{userId}/datetime/recent
     controller: App\Controller\UserDateTimeController::getRecentUserDateTime
     methods: GET
+
+api_user_datetime_edit:
+    path: /api/user/{userId}/datetime/edit
+    controller: App\Controller\UserDateTimeController::getEditUserDateTime
+    methods: GET

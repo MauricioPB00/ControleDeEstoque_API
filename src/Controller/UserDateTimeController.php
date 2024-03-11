@@ -54,7 +54,37 @@ class UserDateTimeController extends AbstractController
 
         $currentDate = new \DateTime();
         $fiveDaysAgo = new \DateTime();
-        $fiveDaysAgo->modify('-2 days');
+        $fiveDaysAgo->modify('-1 days');
+
+        $userDateTimes = $userDateTimeRepository->findRecentUserDateTimes($user, $fiveDaysAgo, $currentDate);
+
+        $serializedUserDateTimes = [];
+
+        foreach ($userDateTimes as $userDateTime) {
+            $serializedUserDateTimes[] = [
+                'id' => $userDateTime->getId(),
+                'date' => $userDateTime->getDate()->format('Y-m-d'),
+                'time' => $userDateTime->getTime()->format('H:i:s')
+            ];
+        }
+
+        return new JsonResponse($serializedUserDateTimes);
+    }
+
+    /**
+     * @Route("/api/user/{userId}/datetime/edit", name="api_user_datetime_edit", methods={"GET"})
+     */
+    public function getEditUserDateTime($userId, UserRepository $userRepository, UserDateTimeRepository $userDateTimeRepository): Response
+    {
+        $user = $userRepository->find($userId);
+
+        if (!$user) {
+            return new JsonResponse(['error' => 'User not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $currentDate = new \DateTime();
+        $fiveDaysAgo = new \DateTime();
+        $fiveDaysAgo->modify('-5 days');
 
         $userDateTimes = $userDateTimeRepository->findRecentUserDateTimes($user, $fiveDaysAgo, $currentDate);
 
