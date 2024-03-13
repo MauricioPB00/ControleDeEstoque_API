@@ -100,4 +100,56 @@ class UserDateTimeController extends AbstractController
 
         return new JsonResponse($serializedUserDateTimes);
     }
+    /**
+     * @Route("/api/user/{userId}/modify", name="api_user_datetime_modify", methods={"POST"})
+     */
+    public function modify(Request $request, $userId): Response
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)->find($userId);
+
+        if (!$user) {
+            return new JsonResponse(['error' => 'User not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        $userDateTime = new UserDateTime();
+        $userDateTime->setDate(new \DateTime($data['date']));
+        $userDateTime->setTime(new \DateTime($data['time']));
+        $userDateTime->setEditado('Insert');
+        $userDateTime->setUser($user);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($userDateTime);
+        $entityManager->flush();
+
+        $dateTime = $userDateTime->getDate()->format('Y-m-d') . ' ' . $userDateTime->getTime()->format('H:i:s');
+
+        return new JsonResponse(['message' => 'Hora Atualizada com sucesso'], Response::HTTP_CREATED);
+    }
+
+    /**
+     * @Route("/api/user/{userId}/modify/update", name="api_user_datetime_modify_update", methods={"POST"})
+     */
+    public function update(Request $request, $userId): Response
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $userDateTimeId = $data['id'];
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $userDateTime = $entityManager->getRepository(UserDateTime::class)->find($userDateTimeId);
+
+        if (!$userDateTime) {
+            return new JsonResponse(['error' => 'UserDateTime not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $userDateTime->setEditado('Update');
+        $userDateTime->setHoraeditada($data['time']);
+
+        $entityManager->flush();
+
+        return new JsonResponse(['message' => 'Hora Atualizada com sucesso'], Response::HTTP_CREATED);
+    }
 }

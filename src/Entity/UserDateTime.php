@@ -38,6 +38,11 @@ class UserDateTime
      */
     private $editado;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $horaeditada;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,6 +93,18 @@ class UserDateTime
     public function setEditado(?string $editado): self
     {
         $this->editado = $editado;
+
+        return $this;
+    }
+
+    public function getHoraeditada(): ?string
+    {
+        return $this->horaeditada;
+    }
+
+    public function setHoraeditada(?string $horaeditada): self
+    {
+        $this->horaeditada = $horaeditada;
 
         return $this;
     }
