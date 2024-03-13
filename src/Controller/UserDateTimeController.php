@@ -84,7 +84,7 @@ class UserDateTimeController extends AbstractController
 
         $currentDate = new \DateTime();
         $fiveDaysAgo = new \DateTime();
-        $fiveDaysAgo->modify('-5 days');
+        $fiveDaysAgo->modify('-4 days');
 
         $userDateTimes = $userDateTimeRepository->findRecentUserDateTimes($user, $fiveDaysAgo, $currentDate);
 
