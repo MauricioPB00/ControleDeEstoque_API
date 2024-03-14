@@ -35,3 +35,13 @@ api_user_datetime_modify_update:
     path: /api/user/{userId}/datetime/modify/update
     controller: App\Controller\UserDateTimeController::update
     methods: PUT
+
+user_approve_time:
+    path: /api/user/approve/time
+    controller: App\Controller\AprovarController::getTimeApprove
+    methods: GET
+
+user_approve_patch:
+    path: /api/user/approve/patch
+    controller: App\Controller\AprovarController::patchUserDateTime
+    methods: PATCH
