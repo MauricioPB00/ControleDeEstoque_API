@@ -51,12 +51,13 @@ class UserDateTimeRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    public function findRecentUserDateTimesWithEditadoNotNull(){
-    return $this->createQueryBuilder('ud')
-        ->where('ud.editado IS NOT NULL')
-        ->getQuery()
-        ->getResult();
-}
+    public function findRecentUserDateTimesWithEditadoNotNull()
+    {
+        return $this->createQueryBuilder('ud')
+            ->where('ud.editado IS NOT NULL')
+            ->getQuery()
+            ->getResult();
+    }
 
     //    /**
     //     * @return UserDateTime[] Returns an array of UserDateTime objects
