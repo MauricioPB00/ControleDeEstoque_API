@@ -36,7 +36,12 @@ class UserDateTime
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $editado;
+    private $insert;
+
+     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $update;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -85,14 +90,26 @@ class UserDateTime
     }
 
 
-    public function getEditado(): ?string
+    public function getInsert(): ?string
     {
-        return $this->editado;
+        return $this->insert;
     }
 
-    public function setEditado(?string $editado): self
+    public function setInsert(?string $insert): self
     {
-        $this->editado = $editado;
+        $this->insert = $insert;
+
+        return $this;
+    }
+
+    public function getUpdate(): ?string
+    {
+        return $this->update;
+    }
+
+    public function setUpdate(?string $update): self
+    {
+        $this->update = $update;
 
         return $this;
     }

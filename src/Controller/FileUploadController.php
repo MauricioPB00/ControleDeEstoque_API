@@ -12,13 +12,10 @@ class FileUploadController extends AbstractController
     /**
      * @Route("/upload-file", name="upload_file")
      */
-    public function upload(Request $request)
+    public function upload(Request $request) // ROTA PARA SALVAR A FOTO DO CADASTRO
     {
-        //var_dump($request->files->all());
-
         $file = $request->files->get('foto');
-        //echo('<br>');
-        //var_dump($file);
+
         if (!$file) {
             return $this->json(['error' => 'No file uploaded'], 400);
         }

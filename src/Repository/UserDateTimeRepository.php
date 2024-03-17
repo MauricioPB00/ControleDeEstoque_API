@@ -54,33 +54,8 @@ class UserDateTimeRepository extends ServiceEntityRepository
     public function findRecentUserDateTimesWithEditadoNotNull()
     {
         return $this->createQueryBuilder('ud')
-            ->where('ud.editado IS NOT NULL')
+            ->where('ud.insert IS NOT NULL OR ud.update IS NOT NULL')
             ->getQuery()
             ->getResult();
     }
-
-    //    /**
-    //     * @return UserDateTime[] Returns an array of UserDateTime objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('u.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?UserDateTime
-    //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }

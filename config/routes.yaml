@@ -23,17 +23,17 @@ api_user_datetime_recent:
 
 api_user_datetime_edit:
     path: /api/user/{userId}/datetime/edit
-    controller: App\Controller\UserDateTimeController::getEditUserDateTime
+    controller: App\Controller\AjusteColabController::getEditUserDateTime
     methods: GET
 
 api_user_datetime_modify:
     path: /api/user/{userId}/datetime/modify
-    controller: App\Controller\UserDateTimeController::modify
+    controller: App\Controller\AjusteColabController::modify
     methods: POST
 
 api_user_datetime_modify_update:
     path: /api/user/{userId}/datetime/modify/update
-    controller: App\Controller\UserDateTimeController::update
+    controller: App\Controller\AjusteColabController::update
     methods: PUT
 
 user_approve_time:

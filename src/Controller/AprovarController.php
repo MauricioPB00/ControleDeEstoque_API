@@ -16,6 +16,7 @@ class AprovarController extends AbstractController
      */
     public function getRecentUserDateTime(UserDateTimeRepository $userDateTimeRepository): JsonResponse
     {
+        // get all 
         $userDateTimes = $userDateTimeRepository->findRecentUserDateTimesWithEditadoNotNull();
 
         $serializedUserDateTimes = [];
@@ -25,7 +26,8 @@ class AprovarController extends AbstractController
                 'id' => $userDateTime->getId(),
                 'date' => $userDateTime->getDate()->format('Y-m-d'),
                 'time' => $userDateTime->getTime()->format('H:i:s'),
-                'editado' => $userDateTime->getEditado(),
+                'update' => $userDateTime->getUpdate(),
+                'insert' => $userDateTime->getInsert(),
                 'horaeditada' => $userDateTime->getHoraeditada(),
                 'user_id' => $userDateTime->getUser()->getId(),
             ];
@@ -33,11 +35,14 @@ class AprovarController extends AbstractController
 
         return new JsonResponse($serializedUserDateTimes);
     }
+
+
     /**
      * @Route("/api/user/approve/patch", name="api_user_approve_patch",  methods={"PATCH"})
      */
     public function patchUserDateTime(Request $request, UserDateTimeRepository $userDateTimeRepository): Response
     {
+        // patch para time === horaedata 
         $data = json_decode($request->getContent(), true);
         if (!isset($data['ids']) || !is_array($data['ids'])) {
             return new JsonResponse(['error' => 'IDs não fornecidos'], Response::HTTP_BAD_REQUEST);
@@ -47,7 +52,7 @@ class AprovarController extends AbstractController
         try {
             $registros = $userDateTimeRepository->findBy(['id' => $ids]);
             foreach ($registros as $registro) {
-                $registro->setEditado(null);
+                $registro->setUpdate(null);
                 $registro->setHoraeditada(null);
             }
             $entityManager = $this->getDoctrine()->getManager();
