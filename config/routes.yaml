@@ -45,3 +45,8 @@ user_approve_patch:
     path: /api/user/approve/patch
     controller: App\Controller\AprovarController::patchUserDateTime
     methods: PATCH
+
+api_user_approve_delete_insert:
+    path: /api/user/approve/delete/insert
+    controller: App\Controller\AprovarController::deleteInsertNoApprove
+    methods: POST
