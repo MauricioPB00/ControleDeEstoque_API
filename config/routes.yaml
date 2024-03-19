@@ -50,3 +50,8 @@ api_user_approve_delete_insert:
     path: /api/user/approve/delete/insert
     controller: App\Controller\AprovarController::deleteInsertNoApprove
     methods: POST
+
+api_user_file:
+    path: /api/user/{userId}/file
+    controller: App\Controller\FileSearchController::getfile
+    methods: GET
