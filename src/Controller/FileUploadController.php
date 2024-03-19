@@ -22,7 +22,7 @@ class FileUploadController extends AbstractController
 
         try {
             $fileName = 'userImg/' . uniqid() . '.' . $file->guessExtension();
-            $file->move($this->getParameter('kernel.project_dir') . '/public/assets/', $fileName);
+            $file->move($this->getParameter('upload_dir'), $fileName);
 
             return $this->json(['message' => 'File uploaded successfully', 'file_path' => $fileName]);
         } catch (FileException $e) {
