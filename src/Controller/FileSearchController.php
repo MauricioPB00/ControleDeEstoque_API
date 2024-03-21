@@ -24,8 +24,8 @@ class FileSearchController extends AbstractController
             return new JsonResponse(['error' => 'User not found'], Response::HTTP_NOT_FOUND);
         }
 
-        $filePath = $user->getFile(); 
+        $file = $user->getFile(); 
 
-        return new JsonResponse(['file_path' => $filePath]);
+        return new JsonResponse(['file' => $file]);
     }
 }

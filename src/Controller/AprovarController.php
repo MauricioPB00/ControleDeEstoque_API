@@ -31,6 +31,9 @@ class AprovarController extends AbstractController
                 'insert' => $userDateTime->getInsert(),
                 'horaeditada' => $userDateTime->getHoraeditada(),
                 'user_id' => $userDateTime->getUser()->getId(),
+                'file'=> $userDateTime->getUser()->getFile(),
+                'name'=> $userDateTime->getUser()->getName(),
+                'username'=> $userDateTime->getUser()->getUsername(),
             ];
         }
 
