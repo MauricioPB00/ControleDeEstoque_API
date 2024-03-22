@@ -55,3 +55,13 @@ api_user_file:
     path: /api/user/{userId}/file
     controller: App\Controller\FileSearchController::getfile
     methods: GET
+
+api_user_profile:
+    path: /api/user/{userId}/profile
+    controller: App\Controller\ProfileController::getProfile
+    methods: GET
+
+api_user_all_profile:
+    path: /api/user/profile
+    controller: App\Controller\ProfileController::getAllProfile
+    methods: GET
