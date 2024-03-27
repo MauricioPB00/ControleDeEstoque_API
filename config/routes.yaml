@@ -65,3 +65,8 @@ api_user_all_profile:
     path: /api/user/profile
     controller: App\Controller\ProfileController::getAllProfile
     methods: GET
+
+api_user_userid_profile/edit:
+    path: /api/user/{userId}/profile/edit
+    controller: App\Controller\ProfileController::salveUpdateUser
+    methods: POST
