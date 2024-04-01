@@ -37,7 +37,8 @@ class AjusteColabController extends AbstractController
             $serializedUserDateTimes[] = [
                 'id' => $userDateTime->getId(),
                 'date' => $userDateTime->getDate()->format('Y-m-d'),
-                'time' => $userDateTime->getTime()->format('H:i:s')
+                'time' => $userDateTime->getTime()->format('H:i:s'),
+                'hor_trab' => $user->getHorTrab(),
             ];
         }
 
