@@ -28,7 +28,7 @@ class UserDateTime
     private $time;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

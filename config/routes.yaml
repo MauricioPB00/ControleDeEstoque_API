@@ -70,3 +70,8 @@ api_user_userid_profile/edit:
     path: /api/user/{userId}/profile/edit
     controller: App\Controller\ProfileController::salveUpdateUser
     methods: POST
+
+api_user_user_painel_buscahoras:
+    path: /api/user/painel/buscahoras
+    controller: App\Controller\PainelCalculoController::buscaHoras
+    methods: GET
