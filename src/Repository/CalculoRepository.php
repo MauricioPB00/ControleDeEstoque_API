@@ -38,6 +38,19 @@ class CalculoRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    
+    public function findByMonth($primeiroDiaMesAtual, $ultimoDiaMesAtual)
+    {
+        return $this->createQueryBuilder('udt')
+            ->andWhere('udt.date BETWEEN :primeiroDiaMesAtual AND :ultimoDiaMesAtual')
+            ->setParameter('primeiroDiaMesAtual', $primeiroDiaMesAtual)
+            ->setParameter('ultimoDiaMesAtual', $ultimoDiaMesAtual)
+            ->orderBy('udt.id', 'DESC')
+            ->addOrderBy('udt.date', 'DESC')
+            ->addOrderBy('udt.time', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return Calculo[] Returns an array of Calculo objects

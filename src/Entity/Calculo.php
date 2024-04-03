@@ -20,7 +20,7 @@ class Calculo
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $data;
+    private $date;
 
     /**
      * @ORM\Column(type="time", nullable=true)
@@ -38,14 +38,14 @@ class Calculo
         return $this->id;
     }
 
-    public function getData(): ?\DateTimeInterface
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->data;
+        return $this->date;
     }
 
-    public function setData(?\DateTimeInterface $data): self
+    public function setDate(?\DateTimeInterface $date): self
     {
-        $this->data = $data;
+        $this->date = $date;
 
         return $this;
     }
