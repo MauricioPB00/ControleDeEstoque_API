@@ -104,10 +104,10 @@ class PainelCalculoController extends AbstractController
         $formattedcalculo = [];
         foreach ($calculo as $calculo) {
             $formattedcalculo[] = [
-                'id' => $calculo->getId(),
                 'date' => $calculo->getDate()->format('Y-m-d'),
                 'time' => $calculo->getTime()->format('H:i:s'),
                 'user_id' => $calculo->getUser()->getId(),
+                'horTrab' => $calculo->getUser()->getHorTrab()
             ];
         }
 
