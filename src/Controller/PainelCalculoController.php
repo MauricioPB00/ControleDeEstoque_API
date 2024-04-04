@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\UserDateTime;
 use App\Entity\Calculo;
+use App\Entity\HorasCalculadas;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\UserDateTimeRepository;
 use App\Repository\CalculoRepository;
+use App\Repository\HorasCalculadasRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Criteria;
 
@@ -112,5 +114,45 @@ class PainelCalculoController extends AbstractController
         }
 
         return new JsonResponse($formattedcalculo);
+    }
+
+    /**
+     * @Route("/api/user/painel/salvarHoraMesTrabalhado", name="api_user_painel_salvarHoraMesTrabalhado", methods={"POST"})
+     */
+    public function salvarHoraMesTrabalhado(Request $request): JsonResponse
+    {
+        $dados = json_decode($request->getContent(), true);
+
+        if (!isset($dados['hora'], $dados['mes'], $dados['userId'])) {
+            return new JsonResponse(['erro' => 'Campos inválidos'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $existeRegistro = $this->getDoctrine()
+            ->getRepository(horasCalculadas::class)
+            ->findOneBy([
+                'mes' => $dados['mes'],
+                'horasTrabalhadas' => $dados['hora'],
+                'user' => $dados['userId']
+            ]);
+
+        if ($existeRegistro) {
+            return new JsonResponse(['erro' => 'Já existe um registro para este usuário nesta data e hora'], Response::HTTP_CONFLICT);
+        }
+
+        $horasCalculadas = new horasCalculadas();
+        $horasCalculadas->setMes(($dados['mes']));
+        $horasCalculadas->setHorasTrabalhadas(($dados['hora']));
+
+        $userId = $this->getDoctrine()->getRepository(User::class)->find($dados['userId']);
+        if (!$userId) {
+            return new JsonResponse(['erro' => 'Usuário não encontrado'], Response::HTTP_NOT_FOUND);
+        }
+        $horasCalculadas->setUser($userId);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($horasCalculadas);
+        $entityManager->flush();
+
+        return new JsonResponse(['mensagem' => 'Horas salvas com sucesso'], Response::HTTP_CREATED);
     }
 }
