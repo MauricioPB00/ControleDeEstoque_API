@@ -33,6 +33,11 @@ class Calculo
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $weekend;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +75,18 @@ class Calculo
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getWeekend(): ?string
+    {
+        return $this->weekend;
+    }
+
+    public function setWeekend(?string $weekend): self
+    {
+        $this->weekend = $weekend;
 
         return $this;
     }

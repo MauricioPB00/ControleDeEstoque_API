@@ -78,6 +78,7 @@ class PainelCalculoController extends AbstractController
         $calculo = new Calculo();
         $calculo->setDate(new \DateTime($dados['date']));
         $calculo->setTime(new \DateTime($dados['hora']));
+        $calculo->setWeekend($dados['weekend']);
 
         $usuario = $this->getDoctrine()->getRepository(User::class)->find($dados['usuario']);
         if (!$usuario) {
