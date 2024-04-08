@@ -59,16 +59,20 @@ class PainelCalculoController extends AbstractController
             return new JsonResponse(['erro' => 'Campos inválidos'], Response::HTTP_BAD_REQUEST);
         }
 
+        $entityManager = $this->getDoctrine()->getManager();
+
         $existeRegistro = $this->getDoctrine()
             ->getRepository(Calculo::class)
             ->findOneBy([
                 'date' => new \DateTime($dados['date']),
-                'time' => new \DateTime($dados['hora']),
                 'user' => $dados['usuario']
             ]);
 
         if ($existeRegistro) {
-            return new JsonResponse(['erro' => 'Já existe um registro para este usuário nesta data e hora'], Response::HTTP_CONFLICT);
+            $existeRegistro->setTime(new \DateTime($dados['hora']));
+            $entityManager->flush();
+
+            return new JsonResponse(['mensagem' => 'Cálculo atualizado com sucesso'], Response::HTTP_OK);
         }
 
         $calculo = new Calculo();
@@ -81,7 +85,6 @@ class PainelCalculoController extends AbstractController
         }
         $calculo->setUser($usuario);
 
-        $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($calculo);
         $entityManager->flush();
 
@@ -127,17 +130,23 @@ class PainelCalculoController extends AbstractController
             return new JsonResponse(['erro' => 'Campos inválidos'], Response::HTTP_BAD_REQUEST);
         }
 
+        $entityManager = $this->getDoctrine()->getManager();
+
         $existeRegistro = $this->getDoctrine()
             ->getRepository(horasCalculadas::class)
             ->findOneBy([
                 'mes' => $dados['mes'],
-                'horasTrabalhadas' => $dados['hora'],
                 'user' => $dados['userId']
             ]);
 
         if ($existeRegistro) {
-            return new JsonResponse(['erro' => 'Já existe um registro para este usuário nesta data e hora'], Response::HTTP_CONFLICT);
+
+            $existeRegistro->setHorasTrabalhadas($dados['hora']);
+            $entityManager->flush();
+
+            return new JsonResponse(['mensagem' => 'Horas atualizadas com sucesso'], Response::HTTP_OK);
         }
+
 
         $horasCalculadas = new horasCalculadas();
         $horasCalculadas->setMes(($dados['mes']));
@@ -149,7 +158,6 @@ class PainelCalculoController extends AbstractController
         }
         $horasCalculadas->setUser($userId);
 
-        $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($horasCalculadas);
         $entityManager->flush();
 
