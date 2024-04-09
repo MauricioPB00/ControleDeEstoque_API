@@ -137,7 +137,8 @@ class PainelCalculoController extends AbstractController
             ->getRepository(horasCalculadas::class)
             ->findOneBy([
                 'mes' => $dados['mes'],
-                'user' => $dados['userId']
+                'user' => $dados['userId'],
+                'ano' => $dados['ano']
             ]);
 
         if ($existeRegistro) {
@@ -152,6 +153,7 @@ class PainelCalculoController extends AbstractController
         $horasCalculadas = new horasCalculadas();
         $horasCalculadas->setMes(($dados['mes']));
         $horasCalculadas->setHorasTrabalhadas(($dados['hora']));
+        $horasCalculadas->setAno(($dados['ano']));
 
         $userId = $this->getDoctrine()->getRepository(User::class)->find($dados['userId']);
         if (!$userId) {

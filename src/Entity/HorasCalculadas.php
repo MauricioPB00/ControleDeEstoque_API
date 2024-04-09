@@ -33,6 +33,11 @@ class HorasCalculadas
      */
     private $mes;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ano;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +75,18 @@ class HorasCalculadas
     public function setMes(?string $mes): self
     {
         $this->mes = $mes;
+
+        return $this;
+    }
+
+    public function getAno(): ?string
+    {
+        return $this->ano;
+    }
+
+    public function setAno(string $ano): self
+    {
+        $this->ano = $ano;
 
         return $this;
     }
