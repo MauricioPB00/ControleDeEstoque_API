@@ -112,6 +112,7 @@ class PainelCalculoController extends AbstractController
             $formattedcalculo[] = [
                 'date' => $calculo->getDate()->format('Y-m-d'),
                 'time' => $calculo->getTime()->format('H:i:s'),
+                'weekend' => $calculo->getWeekend(),
                 'user_id' => $calculo->getUser()->getId(),
                 'horTrab' => $calculo->getUser()->getHorTrab()
             ];
@@ -154,6 +155,7 @@ class PainelCalculoController extends AbstractController
         $horasCalculadas->setMes(($dados['mes']));
         $horasCalculadas->setHorasTrabalhadas(($dados['hora']));
         $horasCalculadas->setAno(($dados['ano']));
+        $horasCalculadas->setFaltas(($dados['falta']));
 
         $userId = $this->getDoctrine()->getRepository(User::class)->find($dados['userId']);
         if (!$userId) {

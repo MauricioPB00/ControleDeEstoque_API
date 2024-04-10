@@ -38,6 +38,21 @@ class HorasCalculadas
      */
     private $ano;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $faltas;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $horasSabado;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $horasDomingo;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +102,42 @@ class HorasCalculadas
     public function setAno(string $ano): self
     {
         $this->ano = $ano;
+
+        return $this;
+    }
+
+    public function getFaltas(): ?string
+    {
+        return $this->faltas;
+    }
+
+    public function setFaltas(?string $faltas): self
+    {
+        $this->faltas = $faltas;
+
+        return $this;
+    }
+
+    public function getHorasSabado(): ?string
+    {
+        return $this->horasSabado;
+    }
+
+    public function setHorasSabado(?string $horasSabado): self
+    {
+        $this->horasSabado = $horasSabado;
+
+        return $this;
+    }
+
+    public function getHorasDomingo(): ?string
+    {
+        return $this->horasDomingo;
+    }
+
+    public function setHorasDomingo(?string $horasDomingo): self
+    {
+        $this->horasDomingo = $horasDomingo;
 
         return $this;
     }
