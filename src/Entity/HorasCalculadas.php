@@ -23,10 +23,7 @@ class HorasCalculadas
      */
     private $user;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $horasTrabalhadas;
+
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -41,17 +38,47 @@ class HorasCalculadas
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $faltas;
+    private $diasFaltados;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $horasSabado;
+    private $diasTrabalhados;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $horasDomingo;
+    private $diasUteis;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $horasFaltando;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $horasNoMesTrabalhadas;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $totalHorasDiasSemana;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $totalHorasDomingo;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $totalHorasSabado;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $progresso;
 
     public function getId(): ?int
     {
@@ -66,18 +93,6 @@ class HorasCalculadas
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getHorasTrabalhadas(): ?string
-    {
-        return $this->horasTrabalhadas;
-    }
-
-    public function setHorasTrabalhadas(?string $horasTrabalhadas): self
-    {
-        $this->horasTrabalhadas = $horasTrabalhadas;
 
         return $this;
     }
@@ -106,38 +121,111 @@ class HorasCalculadas
         return $this;
     }
 
-    public function getFaltas(): ?string
+
+    public function getDiasFaltados(): ?string
     {
-        return $this->faltas;
+        return $this->diasFaltados;
     }
 
-    public function setFaltas(?string $faltas): self
+    public function setDiasFaltados(?string $diasFaltados): self
     {
-        $this->faltas = $faltas;
+        $this->diasFaltados = $diasFaltados;
 
         return $this;
     }
 
-    public function getHorasSabado(): ?string
+    public function getDiasTrabalhados(): ?string
     {
-        return $this->horasSabado;
+        return $this->diasTrabalhados;
     }
 
-    public function setHorasSabado(?string $horasSabado): self
+    public function setDiasTrabalhados(?string $diasTrabalhados): self
     {
-        $this->horasSabado = $horasSabado;
+        $this->diasTrabalhados = $diasTrabalhados;
 
         return $this;
     }
 
-    public function getHorasDomingo(): ?string
+    public function getDiasUteis(): ?string
     {
-        return $this->horasDomingo;
+        return $this->diasUteis;
     }
 
-    public function setHorasDomingo(?string $horasDomingo): self
+    public function setDiasUteis(?string $diasUteis): self
     {
-        $this->horasDomingo = $horasDomingo;
+        $this->diasUteis = $diasUteis;
+
+        return $this;
+    }
+
+    public function getHorasFaltando(): ?string
+    {
+        return $this->horasFaltando;
+    }
+
+    public function setHorasFaltando(?string $horasFaltando): self
+    {
+        $this->horasFaltando = $horasFaltando;
+
+        return $this;
+    }
+
+    public function getHorasNoMesTrabalhadas(): ?string
+    {
+        return $this->horasNoMesTrabalhadas;
+    }
+
+    public function setHorasNoMesTrabalhadas(?string $horasNoMesTrabalhadas): self
+    {
+        $this->horasNoMesTrabalhadas = $horasNoMesTrabalhadas;
+
+        return $this;
+    }
+
+    public function getTotalHorasDiasSemana(): ?string
+    {
+        return $this->totalHorasDiasSemana;
+    }
+
+    public function setTotalHorasDiasSemana(?string $totalHorasDiasSemana): self
+    {
+        $this->totalHorasDiasSemana = $totalHorasDiasSemana;
+
+        return $this;
+    }
+
+    public function getTotalHorasDomingo(): ?string
+    {
+        return $this->totalHorasDomingo;
+    }
+
+    public function setTotalHorasDomingo(?string $totalHorasDomingo): self
+    {
+        $this->totalHorasDomingo = $totalHorasDomingo;
+
+        return $this;
+    }
+
+    public function getTotalHorasSabado(): ?string
+    {
+        return $this->totalHorasSabado;
+    }
+
+    public function setTotalHorasSabado(?string $totalHorasSabado): self
+    {
+        $this->totalHorasSabado = $totalHorasSabado;
+
+        return $this;
+    }
+
+    public function getProgresso(): ?string
+    {
+        return $this->progresso;
+    }
+
+    public function setProgresso(?string $progresso): self
+    {
+        $this->progresso = $progresso;
 
         return $this;
     }

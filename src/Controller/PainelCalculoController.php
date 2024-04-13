@@ -126,46 +126,52 @@ class PainelCalculoController extends AbstractController
      */
     public function salvarHoraMesTrabalhado(Request $request): JsonResponse
     {
-        $dados = json_decode($request->getContent(), true);
-
-        if (!isset($dados['hora'], $dados['mes'], $dados['userId'])) {
-            return new JsonResponse(['erro' => 'Campos inválidos'], Response::HTTP_BAD_REQUEST);
-        }
-
         $entityManager = $this->getDoctrine()->getManager();
+        $data = json_decode($request->getContent(), true);
+        
+        foreach ($data as $userData) {
+            if (!isset($userData['user'])) {
+                continue;
+            }
 
-        $existeRegistro = $this->getDoctrine()
-            ->getRepository(horasCalculadas::class)
-            ->findOneBy([
-                'mes' => $dados['mes'],
-                'user' => $dados['userId'],
-                'ano' => $dados['ano']
-            ]);
+            $userId = $userData['user'];
+            $user = $entityManager->getRepository(User::class)->find($userId);
 
-        if ($existeRegistro) {
+            if (!$user) {
+                continue;
+            }
 
-            $existeRegistro->setHorasTrabalhadas($dados['hora']);
-            $entityManager->flush();
+            $existingRecord = $entityManager->getRepository(HorasCalculadas::class)
+                ->findOneBy([
+                    'user' => $user,
+                    'mes' => $userData['mes'],
+                    'ano' => $userData['ano']
+                ]);
 
-            return new JsonResponse(['mensagem' => 'Horas atualizadas com sucesso'], Response::HTTP_OK);
+            if ($existingRecord) {
+                $horasCalculadas = $existingRecord;
+            } else {
+                $horasCalculadas = new HorasCalculadas();
+                $horasCalculadas->setUser($user);
+            }
+
+            $horasCalculadas->setAno($userData['ano']);
+            $horasCalculadas->setDiasFaltados($userData['diasFaltados']);
+            $horasCalculadas->setDiasTrabalhados($userData['diasTrabalhados']);
+            $horasCalculadas->setDiasUteis($userData['diasUteis']);
+            $horasCalculadas->setHorasFaltando($userData['horasFaltando']);
+            $horasCalculadas->setHorasNoMesTrabalhadas($userData['horasNoMesTrabalhadas']);
+            $horasCalculadas->setMes($userData['mes']);
+            $horasCalculadas->setTotalHorasDiasSemana($userData['totalHorasDiasSemana']);
+            $horasCalculadas->setTotalHorasDomingo($userData['totalHorasDomingo']);
+            $horasCalculadas->setTotalHorasSabado($userData['totalHorasSabado']);
+            $horasCalculadas->setProgresso($userData['progressBar']);
+
+            $entityManager->persist($horasCalculadas);
         }
 
-
-        $horasCalculadas = new horasCalculadas();
-        $horasCalculadas->setMes(($dados['mes']));
-        $horasCalculadas->setHorasTrabalhadas(($dados['hora']));
-        $horasCalculadas->setAno(($dados['ano']));
-        $horasCalculadas->setFaltas(($dados['falta']));
-
-        $userId = $this->getDoctrine()->getRepository(User::class)->find($dados['userId']);
-        if (!$userId) {
-            return new JsonResponse(['erro' => 'Usuário não encontrado'], Response::HTTP_NOT_FOUND);
-        }
-        $horasCalculadas->setUser($userId);
-
-        $entityManager->persist($horasCalculadas);
         $entityManager->flush();
 
-        return new JsonResponse(['mensagem' => 'Horas salvas com sucesso'], Response::HTTP_CREATED);
+        return new JsonResponse(['message' => 'Dados salvos com sucesso'], JsonResponse::HTTP_OK);
     }
 }
