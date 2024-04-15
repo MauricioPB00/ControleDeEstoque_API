@@ -80,3 +80,13 @@ api_user_user_painel_buscahorasCalculadas:
     path: /api/user/painel/buscahorasCalculadas
     controller: App\Controller\PainelCalculoController::buscaHorasCalculadas
     methods: GET
+
+api_user_feriado_salvar:
+    path: /api/user/feriado/salvarFeriados
+    controller: App\Controller\FeriadoController::salvarFeriados
+    methods: POST
+
+api_user_feriado_buscar:
+    path: /api/user/feriado/getFeriado
+    controller: App\Controller\FeriadoController::buscarFeriados
+    methods: GET
