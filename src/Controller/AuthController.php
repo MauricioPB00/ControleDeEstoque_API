@@ -43,10 +43,6 @@ class AuthController extends ApiController
         $horTrab = $request->get('horTrab');
         $wage = $request->get('wage');
         $job = $request->get('job');
-        $horaIni = $request->get('horini1');
-        $horIniFim = $request->get('horini2');
-        $horIniAft = $request->get('horini3');
-        $horFimAft = $request->get('horini4');
         $file = $request->get('foto');
 
         if (empty($username) || empty($password) || empty($email)) {
@@ -66,10 +62,6 @@ class AuthController extends ApiController
         $user->setHorTrab($horTrab);
         $user->setWage($wage);
         $user->setJob($job);
-        $user->setHorIni($horaIni);
-        $user->setHorIniFim($horIniFim);
-        $user->setHorIniAft($horIniAft);
-        $user->setHorFimAft($horFimAft);
         $user->setFile($file);
 
         //dd($user);

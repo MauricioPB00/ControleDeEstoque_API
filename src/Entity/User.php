@@ -79,25 +79,6 @@ class User implements UserInterface
      */
     private $job;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $horIni;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $horIniFim;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $horIniAft;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $horFimAft;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -269,54 +250,6 @@ class User implements UserInterface
     public function setJob(?string $job): self
     {
         $this->job = $job;
-
-        return $this;
-    }
-
-    public function getHorIni(): ?string
-    {
-        return $this->horIni;
-    }
-
-    public function setHorIni(?string $horIni): self
-    {
-        $this->horIni = $horIni;
-
-        return $this;
-    }
-
-    public function getHorIniFim(): ?string
-    {
-        return $this->horIniFim;
-    }
-
-    public function setHorIniFim(?string $horIniFim): self
-    {
-        $this->horIniFim = $horIniFim;
-
-        return $this;
-    }
-
-    public function getHorIniAft(): ?string
-    {
-        return $this->horIniAft;
-    }
-
-    public function setHorIniAft(?string $horIniAft): self
-    {
-        $this->horIniAft = $horIniAft;
-
-        return $this;
-    }
-
-    public function getHorFimAft(): ?string
-    {
-        return $this->horFimAft;
-    }
-
-    public function setHorFimAft(?string $horFimAft): self
-    {
-        $this->horFimAft = $horFimAft;
 
         return $this;
     }

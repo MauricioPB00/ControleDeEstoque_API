@@ -39,10 +39,6 @@ class ProfileController extends AbstractController
             'horTrab' => $user->getHorTrab(),
             'wage' => $user->getWage(),
             'job' => $user->getJob(),
-            'horaIni' => $user->getHorIni(),
-            'horIniFim' => $user->getHorIniFim(),
-            'horIniAft' => $user->getHorIniAft(),
-            'horFimAft' => $user->getHorFimAft(),
             'file' => $user->getFile(),
         ];
 
@@ -51,7 +47,7 @@ class ProfileController extends AbstractController
 
     /**
      * @Route("/api/user/profile", name="api_user_all_profile", methods={"GET"})
-     */
+    */
 
      public function getAllProfile(UserRepository $userRepository, UserDateTimeRepository $userDateTimeRepository): Response
      {
@@ -96,10 +92,6 @@ class ProfileController extends AbstractController
         $user->setHorTrab($data['horTrab']);
         $user->setWage($data['wage']);
         $user->setJob($data['job']);
-        $user->setHorIni($data['horaIni']);
-        $user->setHorIniFim($data['horIniFim']);
-        $user->setHorIniAft($data['horIniAft']);
-        $user->setHorFimAft($data['horFimAft']);
 
         $entityManager->flush();
 

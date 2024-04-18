@@ -90,3 +90,8 @@ api_user_feriado_buscar:
     path: /api/user/feriado/getFeriado
     controller: App\Controller\FeriadoController::buscarFeriados
     methods: GET
+
+api_user_empresa_horasCalculadas:
+    path: /api/user/empresa/horasCalculadas
+    controller: App\Controller\EmpresaController::buscarHorasCalculadas
+    methods: GET
