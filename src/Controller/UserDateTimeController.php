@@ -20,30 +20,6 @@ class UserDateTimeController extends AbstractController
     public function create(Request $request, $userId): Response
     {
         // registrar ponto
-        $user = $this->getDoctrine()->getRepository(User::class)->find($userId);
-
-        if (!$user) {
-            return new JsonResponse(['error' => 'User not found'], Response::HTTP_NOT_FOUND);
-        }
-
-        $data = json_decode($request->getContent(), true);
-
-        $userDateTime = new UserDateTime();
-        $userDateTime->setDate(new \DateTime($data['date']));
-        $userDateTime->setTime(new \DateTime($data['time']));
-        $userDateTime->setUser($user);
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($userDateTime);
-        $entityManager->flush();
-
-        $dateTime = $userDateTime->getDate()->format('Y-m-d') . ' ' . $userDateTime->getTime()->format('H:i:s');
-
-        return new JsonResponse(['message' => 'Hora Registrada com sucesso', 'dateTime' => $dateTime], Response::HTTP_CREATED);
-
-        // para receber um array 
-        // registrar pontos []
-
         // $user = $this->getDoctrine()->getRepository(User::class)->find($userId);
 
         // if (!$user) {
@@ -52,19 +28,43 @@ class UserDateTimeController extends AbstractController
 
         // $data = json_decode($request->getContent(), true);
 
-        // foreach ($data as $dateTimeData) {
-        //     $userDateTime = new UserDateTime();
-        //     $userDateTime->setDate(new \DateTime($dateTimeData['date']));
-        //     $userDateTime->setTime(new \DateTime($dateTimeData['time']));
-        //     $userDateTime->setUser($user);
+        // $userDateTime = new UserDateTime();
+        // $userDateTime->setDate(new \DateTime($data['date']));
+        // $userDateTime->setTime(new \DateTime($data['time']));
+        // $userDateTime->setUser($user);
 
-        //     $entityManager = $this->getDoctrine()->getManager();
-        //     $entityManager->persist($userDateTime);
-        // }
-
+        // $entityManager = $this->getDoctrine()->getManager();
+        // $entityManager->persist($userDateTime);
         // $entityManager->flush();
 
-        // return new JsonResponse(['message' => 'Horas Registradas com sucesso'], Response::HTTP_CREATED);
+        // $dateTime = $userDateTime->getDate()->format('Y-m-d') . ' ' . $userDateTime->getTime()->format('H:i:s');
+
+        // return new JsonResponse(['message' => 'Hora Registrada com sucesso', 'dateTime' => $dateTime], Response::HTTP_CREATED);
+
+        // para receber um array 
+        // registrar pontos []
+
+        $user = $this->getDoctrine()->getRepository(User::class)->find($userId);
+
+        if (!$user) {
+            return new JsonResponse(['error' => 'User not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        foreach ($data as $dateTimeData) {
+            $userDateTime = new UserDateTime();
+            $userDateTime->setDate(new \DateTime($dateTimeData['date']));
+            $userDateTime->setTime(new \DateTime($dateTimeData['time']));
+            $userDateTime->setUser($user);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($userDateTime);
+        }
+
+        $entityManager->flush();
+
+        return new JsonResponse(['message' => 'Horas Registradas com sucesso'], Response::HTTP_CREATED);
     
     }
 

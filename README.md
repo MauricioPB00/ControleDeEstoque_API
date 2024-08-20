@@ -585,3 +585,11 @@ Para confirmar que as tabelas estao relacionadas
 SELECT udt.id AS user_date_time_id, udt.date AS user_date, udt.time AS user_time, u.id AS user_id, u.username AS username
 FROM user_date_time udt
 JOIN "user" u ON udt.user_id = u.id;
+
+
+
+
+ajustar caminho da foto cadastro no service.yaml
+linha 7
+parameters:
+    upload_dir: 'C:\Users\mau_p\Documents\ControleDeEstoque\routing-controleEstoque\src\img'
